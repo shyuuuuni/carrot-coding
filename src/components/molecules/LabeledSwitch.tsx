@@ -16,7 +16,7 @@ export default function LabeledSwitch({
 }: Props) {
   return (
     // eslint-disable-next-line jsx-a11y/label-has-associated-control
-    <label className="relative inline-flex items-center">
+    <label className="relative inline-flex cursor-pointer items-center">
       <Switch onClick={onClick} defaultChecked={defaultChecked} />
       <Label value={labelValue} />
     </label>

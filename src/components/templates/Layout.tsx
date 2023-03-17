@@ -8,7 +8,9 @@ export default function Layout({ children }: Props) {
   return (
     <>
       <Navbar />
-      <main>{children}</main>
+      <main className="bg-gray-200 text-gray-900 dark:bg-gray-800 dark:text-gray-300">
+        {children}
+      </main>
     </>
   );
 }

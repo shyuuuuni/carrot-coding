@@ -9,7 +9,7 @@ type Props = {
 export default function NavLink({ link, title }: Props) {
   return (
     <Link href={link}>
-      <p className="mt-0 block text-white hover:text-gray-300">{title}</p>
+      <p className="mt-0 block text-gray-200 hover:text-gray-300">{title}</p>
     </Link>
   );
 }

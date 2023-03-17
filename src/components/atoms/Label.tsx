@@ -6,6 +6,6 @@ type Props = {
 
 export default function Label({ value }: Props) {
   return (
-    <span className="ml-3 text-sm font-medium text-gray-300">{value}</span>
+    <span className="ml-3 text-sm font-medium text-gray-200">{value}</span>
   );
 }

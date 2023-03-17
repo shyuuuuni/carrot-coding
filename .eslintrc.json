@@ -4,7 +4,9 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:react-hooks/recommended",
     "plugin:jsx-a11y/recommended",
-    "prettier"
+    "prettier",
+    "plugin:prettier/recommended",
+    "next/core-web-vitals"
   ],
   "plugins": ["@typescript-eslint", "prettier"],
   "parser": "@typescript-eslint/parser",
@@ -29,6 +31,8 @@
     "@typescript-eslint/no-use-before-define": ["error"],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "prettier/prettier": ["error"]
+    "prettier/prettier": ["error"],
+    "react/prop-types": "off",
+    "react/require-default-props": "off"
   }
 }

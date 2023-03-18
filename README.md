@@ -6,5 +6,8 @@
 
 ### 색상
 
+좌: 기본모드, 우: 다크모드
+
 - 배경: `bg-gray-200`, `bg-gray-800`
-- 텍스트: `text-gray-900`, `text-gray-300`(다크모드)
+- 텍스트: `text-gray-900`, `text-gray-200`
+- 텍스트(hover): `미정`, `text-gray-300`

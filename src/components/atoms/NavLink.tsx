@@ -9,7 +9,7 @@ type Props = {
 
 export default function NavLink({ link, title }: Props) {
   const router = useRouter();
-  const selected = router.asPath === link;
+  const selected = router.pathname.startsWith(link);
 
   return (
     <Link href={link}>

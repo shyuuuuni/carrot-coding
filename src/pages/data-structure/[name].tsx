@@ -6,16 +6,14 @@ import { ONE_DAY } from "@/constants/time";
 import { DataStructureDetails, DataStructureSearchInfo } from "@/types/types";
 
 type Props = {
-  search: DataStructureSearchInfo[];
+  searchInfo: DataStructureSearchInfo[];
   details: DataStructureDetails;
 };
 
-export default function DataStructurePost({ search, details }: Props) {
-  console.log(search, details);
-
+export default function DataStructurePost({ searchInfo, details }: Props) {
   return (
     <div>
-      <Sidebar searchDatas={search} />
+      <Sidebar searchInfo={searchInfo} />
       <div>{details.code}</div>
       <div>{Object.entries(details.complexity)}</div>
       <div>{details.description}</div>
@@ -35,7 +33,7 @@ export async function getStaticProps({
   const dataStructureList = await dsListRes.json();
 
   // Make object with { name, link }
-  const searchList = dataStructureList.map((name: string) => ({
+  const searchInfoList = dataStructureList.map((name: string) => ({
     name,
     link: `/data-structure/${name.replaceAll(" ", "-")}`,
   }));
@@ -48,7 +46,7 @@ export async function getStaticProps({
 
   return {
     props: {
-      search: searchList,
+      searchInfo: searchInfoList,
       details: {
         code: details.Code,
         complexity: details.Complexity,

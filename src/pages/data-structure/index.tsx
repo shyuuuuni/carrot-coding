@@ -6,13 +6,13 @@ import { ONE_DAY } from "@/constants/time";
 import { DataStructureSearchInfo } from "@/types/types";
 
 type Props = {
-  search: DataStructureSearchInfo[];
+  searchInfo: DataStructureSearchInfo[];
 };
 
-export default function DataStructure({ search }: Props) {
+export default function DataStructure({ searchInfo }: Props) {
   return (
     <div>
-      <Sidebar searchDatas={search} />
+      <Sidebar searchInfo={searchInfo} />
       <div>자료구조 페이지</div>
     </div>
   );
@@ -24,7 +24,7 @@ export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
   const dataStructureList = await res.json();
 
   // Make object with { name, link }
-  const searchList: DataStructureSearchInfo[] = dataStructureList.map(
+  const searchInfoList: DataStructureSearchInfo[] = dataStructureList.map(
     (name: string) => ({
       name,
       link: `/data-structure/${name.replaceAll(" ", "-")}`,
@@ -32,7 +32,7 @@ export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
   );
 
   return {
-    props: { search: searchList },
+    props: { searchInfo: searchInfoList },
     revalidate: ONE_DAY, // Re-generate every day
   };
 }

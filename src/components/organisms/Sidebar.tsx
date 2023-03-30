@@ -2,13 +2,13 @@ import Link from "next/link";
 import React, { useCallback, useState } from "react";
 
 import SearchInput from "@/components/molecules/SearchInput";
-import { SearchDataDS } from "@/types/types";
+import { DataStructureSearchInfo } from "@/types/types";
 
 type Props = {
-  searchDatas?: SearchDataDS[];
+  searchInfo?: DataStructureSearchInfo[];
 };
 
-export default function Sidebar({ searchDatas = [] }: Props) {
+export default function Sidebar({ searchInfo = [] }: Props) {
   const [searchInput, setSearchInput] = useState("");
   const [searchWord, setSearchWord] = useState("");
   const isSearching = searchWord.length > 0;
@@ -40,9 +40,9 @@ export default function Sidebar({ searchDatas = [] }: Props) {
       ) : (
         <nav>
           <ul>
-            {searchDatas.map((searchData) => (
-              <li key={searchData.id}>
-                <Link href={searchData.link}>{searchData.name}</Link>
+            {searchInfo.map((search) => (
+              <li key={search.name}>
+                <Link href={search.link}>{search.name}</Link>
               </li>
             ))}
           </ul>

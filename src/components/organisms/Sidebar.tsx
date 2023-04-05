@@ -1,5 +1,6 @@
-import Link from "next/link";
 import React, { useCallback, useState } from "react";
+
+import Link from "next/link";
 
 import SearchInput from "@/components/molecules/SearchInput";
 import { DataStructureSearchInfo } from "@/types/types";

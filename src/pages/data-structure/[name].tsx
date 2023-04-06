@@ -1,6 +1,7 @@
 import { GetStaticPropsContext, GetStaticPropsResult } from "next";
 
-import Sidebar from "@/components/organisms/Sidebar";
+import DataStructurePostContents from "@/components/organisms/DataStructurePostContents";
+import Post from "@/components/templates/Post";
 import { API_URL } from "@/constants/env";
 import { ONE_DAY } from "@/constants/time";
 import { DataStructureDetails, DataStructureSearchInfo } from "@/types/types";
@@ -12,12 +13,9 @@ type Props = {
 
 export default function DataStructurePost({ searchInfo, details }: Props) {
   return (
-    <div>
-      <Sidebar searchInfo={searchInfo} />
-      <div>{details.code}</div>
-      <div>{Object.entries(details.complexity)}</div>
-      <div>{details.description}</div>
-    </div>
+    <Post sidebarSearchInfo={searchInfo}>
+      <DataStructurePostContents dataStructureDetails={details} />
+    </Post>
   );
 }
 
@@ -48,6 +46,7 @@ export async function getStaticProps({
     props: {
       searchInfo: searchInfoList,
       details: {
+        name: params?.name ?? "", // TODO: 백엔드 응답 데이터 포맷 수정
         code: details.Code,
         complexity: details.Complexity,
         description: details.Description,

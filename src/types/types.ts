@@ -4,6 +4,7 @@ export type DataStructureSearchInfo = {
   link: string;
 };
 export type DataStructureDetails = {
+  name: string;
   code: string;
   complexity: { [key: string]: string };
   description: string;

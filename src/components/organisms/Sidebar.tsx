@@ -1,5 +1,6 @@
-import Link from "next/link";
 import React, { useCallback, useState } from "react";
+
+import Link from "next/link";
 
 import SearchInput from "@/components/molecules/SearchInput";
 import { DataStructureSearchInfo } from "@/types/types";
@@ -29,7 +30,7 @@ export default function Sidebar({ searchInfo = [] }: Props) {
   }, [searchInput, setSearchWord]);
 
   return (
-    <div className="h-full w-80 border-l border-r border-gray-700 p-4">
+    <div className="fixed h-full w-80 flex-none border-l border-r border-gray-700 p-4">
       <SearchInput
         value={searchInput}
         onChange={handleSearchChange}

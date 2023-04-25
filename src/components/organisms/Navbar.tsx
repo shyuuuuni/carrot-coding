@@ -9,7 +9,7 @@ function Navbar() {
   const { isDarkmode, updateDarkmode } = useDarkmode();
 
   return (
-    <nav className="sticky top-0 z-10 flex w-full flex-wrap items-center justify-between border-b border-gray-700 bg-gray-800 p-6 dark:bg-gray-800/75 dark:backdrop-blur dark:backdrop-filter">
+    <nav className="flex w-full flex-wrap items-center justify-between border-b border-gray-700 bg-gray-800 p-6 dark:bg-gray-800/75 dark:backdrop-blur dark:backdrop-filter">
       <NavLogo />
       <div className="flex flex-grow items-center">
         <div className="flex flex-grow gap-4 text-sm">

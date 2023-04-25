@@ -13,7 +13,7 @@ export default function DataStructure({ searchInfo }: Props) {
   return (
     <div>
       <Sidebar searchInfo={searchInfo} />
-      <div>자료구조 페이지</div>
+      <div className="bg-transparent">자료구조 페이지</div>
     </div>
   );
 }

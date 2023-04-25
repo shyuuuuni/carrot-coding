@@ -1,15 +1,29 @@
 import React from "react";
 
-import { Prism, PrismProps } from "@mantine/prism";
+import ReactHighlightSyntax, { Language } from "react-highlight-syntax";
 
 type Props = {
   code: string;
-} & Pick<PrismProps, "language">;
+  language: string;
+};
 
-export default function Codeblock({ language, code }: Props) {
+function getFormattedLanguage(language: string): Language {
+  const languages: { [key: string]: Language } = {
+    javascript: "JavaScript",
+    java: "Java",
+    "c++": "C++",
+    python: "Python",
+  };
+
+  return languages[language] || "PlainText";
+}
+
+export default function CodeBlock({ code, language }: Props) {
+  const formattedLanguage = getFormattedLanguage(language);
+
   return (
-    <Prism className="max-w-4xl" colorScheme="light" language={language}>
+    <ReactHighlightSyntax language={formattedLanguage} copy>
       {code}
-    </Prism>
+    </ReactHighlightSyntax>
   );
 }

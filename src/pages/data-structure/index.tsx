@@ -24,12 +24,12 @@ export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
   const dataStructureList = await res.json();
 
   // Make object with { name, link }
-  const searchInfoList: DataStructureSearchInfo[] = dataStructureList.map(
-    (name: string) => ({
-      name,
-      link: `/data-structure/${name.replaceAll(" ", "-")}`,
-    })
-  );
+  const searchInfoList: DataStructureSearchInfo[] = Object.keys(
+    dataStructureList
+  ).map((name: string) => ({
+    name,
+    link: `/data-structure/${name.replaceAll(" ", "-")}`,
+  }));
 
   return {
     props: { searchInfo: searchInfoList },

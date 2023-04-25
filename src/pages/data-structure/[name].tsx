@@ -4,7 +4,11 @@ import DataStructurePostContents from "@/components/organisms/DataStructurePostC
 import Post from "@/components/templates/Post";
 import { API_URL } from "@/constants/env";
 import { ONE_DAY } from "@/constants/time";
-import { DataStructureDetails, DataStructureSearchInfo } from "@/types/types";
+import {
+  DataStructureDetail,
+  DataStructureDetails,
+  DataStructureSearchInfo,
+} from "@/types/types";
 
 type Props = {
   searchInfo: DataStructureSearchInfo[];
@@ -27,29 +31,37 @@ export async function getStaticProps({
   params,
 }: GetStaticPropsContext<Params>): Promise<GetStaticPropsResult<Props>> {
   // Get data structure name list
-  const dsListRes = await fetch(`${API_URL}/data-structure/list`);
-  const dataStructureList = await dsListRes.json();
+  const dataStructureListRes = await fetch(`${API_URL}/data-structure/list`);
+  const dataStructureList = await dataStructureListRes.json();
 
   // Make object with { name, link }
-  const searchInfoList = dataStructureList.map((name: string) => ({
+  const searchInfo = Object.keys(dataStructureList).map((name: string) => ({
     name,
     link: `/data-structure/${name.replaceAll(" ", "-")}`,
   }));
 
   // Get data structure detail
   const detailRes = await fetch(
-    `${API_URL}/data-structure/${params?.name?.replace(" ", "-")}/javascript`
+    `${API_URL}/data-structure/${params?.name?.replace(" ", "-")}`
   );
-  const details = await detailRes.json();
+  const details = (await detailRes.json()) as DataStructureDetail[];
 
   return {
     props: {
-      searchInfo: searchInfoList,
+      searchInfo,
       details: {
-        name: params?.name ?? "", // TODO: 백엔드 응답 데이터 포맷 수정
-        code: details.Code,
-        complexity: details.Complexity,
-        description: details.Description,
+        name: details[0].name,
+        complexity: details[0].complexity,
+        description: details[0].description,
+        code: details
+          .map((detail) => ({
+            language: detail.language,
+            state: detail.state,
+            code: detail.code,
+            createdAt: detail.createdAt,
+            updatedAt: detail.updatedAt,
+          }))
+          .sort(),
       },
     },
     revalidate: ONE_DAY, // Re-generate every day
@@ -59,10 +71,10 @@ export async function getStaticProps({
 export async function getStaticPaths() {
   // Get data structure name list
   const res = await fetch(`${API_URL}/data-structure/list`);
-  const searchRes = await res.json();
+  const dataStructureList = await res.json();
 
   // Make name to link
-  const paths = searchRes.map(
+  const paths = Object.keys(dataStructureList).map(
     (name: string) => `/data-structure/${name.replaceAll(" ", "-")}`
   );
 

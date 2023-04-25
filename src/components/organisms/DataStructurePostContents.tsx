@@ -1,9 +1,9 @@
 import React from "react";
 
-import Codeblock from "@/components/atoms/Codeblock";
 import Content from "@/components/atoms/Content";
 import TextArea from "@/components/atoms/TextArea";
 import TimeComplexity from "@/components/atoms/TimeComplexity";
+import Code from "@/components/molecules/Code";
 import { DataStructureDetails } from "@/types/types";
 
 type Props = {
@@ -15,9 +15,11 @@ export default function DataStructurePostContents({
 }: Props) {
   return (
     <div className="flex grow-0 flex-col gap-10 p-4">
-      <div className="pb-4 text-5xl font-bold">{dataStructureDetails.name}</div>
+      <div className="pb-4 text-5xl font-bold">
+        {dataStructureDetails.name.kr}({dataStructureDetails.name.en})
+      </div>
       <Content title="소스코드">
-        <Codeblock language="javascript" code={dataStructureDetails.code} />
+        <Code codes={dataStructureDetails.code} />
       </Content>
       <Content title="시간 복잡도">
         <TimeComplexity complexity={dataStructureDetails.complexity} />

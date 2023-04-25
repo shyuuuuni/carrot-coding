@@ -27,14 +27,14 @@ export default function DropDown({
       <button
         type="button"
         onClick={toggleDropdown}
-        className="rounded-md bg-gray-300 py-2 px-4 text-gray-700 shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+        className="focus:outline-none rounded-md bg-gray-300 py-2 px-4 text-gray-700 shadow-md focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100"
       >
         {selectedItem ? selectedItem.label : defaultLabel}
       </button>
       {isOpen && (
         <div
           onClick={handleCloseDropdown}
-          className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+          className="focus:outline-none absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 sm:text-sm"
         >
           {children}
         </div>

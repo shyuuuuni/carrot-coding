@@ -1,6 +1,7 @@
 import { GetStaticPropsResult } from "next/types";
 
-import Sidebar from "@/components/organisms/Sidebar";
+import IndexPostContents from "@/components/organisms/IndexPostContents";
+import Post from "@/components/templates/Post";
 import { API_URL } from "@/constants/env";
 import { ONE_DAY } from "@/constants/time";
 import { DataStructureSearchInfo } from "@/types/types";
@@ -11,10 +12,9 @@ type Props = {
 
 export default function DataStructure({ searchInfo }: Props) {
   return (
-    <div>
-      <Sidebar searchInfo={searchInfo} />
-      <div>자료구조 페이지</div>
-    </div>
+    <Post sidebarSearchInfo={searchInfo}>
+      <IndexPostContents />
+    </Post>
   );
 }
 
@@ -24,12 +24,12 @@ export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
   const dataStructureList = await res.json();
 
   // Make object with { name, link }
-  const searchInfoList: DataStructureSearchInfo[] = dataStructureList.map(
-    (name: string) => ({
-      name,
-      link: `/data-structure/${name.replaceAll(" ", "-")}`,
-    })
-  );
+  const searchInfoList: DataStructureSearchInfo[] = Object.keys(
+    dataStructureList
+  ).map((name: string) => ({
+    name,
+    link: `/data-structure/${name.replaceAll(" ", "-")}`,
+  }));
 
   return {
     props: { searchInfo: searchInfoList },

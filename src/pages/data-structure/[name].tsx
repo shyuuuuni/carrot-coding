@@ -4,7 +4,11 @@ import DataStructurePostContents from "@/components/organisms/DataStructurePostC
 import Post from "@/components/templates/Post";
 import { API_URL } from "@/constants/env";
 import { ONE_DAY } from "@/constants/time";
-import { DataStructureDetails, DataStructureSearchInfo } from "@/types/types";
+import {
+  DataStructureDetail,
+  DataStructureDetails,
+  DataStructureSearchInfo,
+} from "@/types/types";
 
 type Props = {
   searchInfo: DataStructureSearchInfo[];
@@ -26,43 +30,60 @@ type Params = {
 export async function getStaticProps({
   params,
 }: GetStaticPropsContext<Params>): Promise<GetStaticPropsResult<Props>> {
-  // Get data structure name list
-  const dsListRes = await fetch(`${API_URL}/data-structure/list`);
-  const dataStructureList = await dsListRes.json();
+  const dataStructureName = params?.name as string;
 
-  // Make object with { name, link }
-  const searchInfoList = dataStructureList.map((name: string) => ({
+  // 자료구조 목록 전체 가져오기
+  const dataStructureListRes = await fetch(`${API_URL}/data-structure/list`);
+  const dataStructureList: { [key: string]: DataStructureDetail[] } =
+    await dataStructureListRes.json();
+
+  // 사이드바를 위한 검색 정보
+  const searchInfo = Object.keys(dataStructureList).map((name: string) => ({
     name,
     link: `/data-structure/${name.replaceAll(" ", "-")}`,
   }));
 
-  // Get data structure detail
-  const detailRes = await fetch(
-    `${API_URL}/data-structure/${params?.name?.replace(" ", "-")}/javascript`
-  );
-  const details = await detailRes.json();
+  // 포스트 컨텐츠를 위한 자료구조 정보 [이름, 데이터]
+  const dataStructureInfos = Object.entries(dataStructureList).find((info) => {
+    return info[0].replaceAll(" ", "-") === dataStructureName;
+  });
+
+  if (!dataStructureInfos) {
+    throw Error(`data fetching error with ${dataStructureName}.`);
+  }
+
+  // 데이터만 필터링
+  const dataStructureDetails = dataStructureInfos[1];
 
   return {
     props: {
-      searchInfo: searchInfoList,
+      searchInfo,
       details: {
-        name: params?.name ?? "", // TODO: 백엔드 응답 데이터 포맷 수정
-        code: details.Code,
-        complexity: details.Complexity,
-        description: details.Description,
+        name: dataStructureDetails[0].name,
+        complexity: dataStructureDetails[0].complexity,
+        description: dataStructureDetails[0].description,
+        code: dataStructureDetails
+          .map((detail) => ({
+            language: detail.language,
+            state: detail.state,
+            code: detail.code,
+            createdAt: detail.createdAt,
+            updatedAt: detail.updatedAt,
+          }))
+          .sort(),
       },
     },
-    revalidate: ONE_DAY, // Re-generate every day
+    revalidate: ONE_DAY / 24, // 1시간마다 재생성
   };
 }
 
 export async function getStaticPaths() {
-  // Get data structure name list
+  // 자료구조 목록 전체 가져오기
   const res = await fetch(`${API_URL}/data-structure/list`);
-  const searchRes = await res.json();
+  const dataStructureList = await res.json();
 
-  // Make name to link
-  const paths = searchRes.map(
+  // 자료구조 이름을 프론트엔드 URL 경로로 변경
+  const paths = Object.keys(dataStructureList).map(
     (name: string) => `/data-structure/${name.replaceAll(" ", "-")}`
   );
 

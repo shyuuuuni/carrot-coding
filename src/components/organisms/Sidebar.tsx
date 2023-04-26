@@ -30,7 +30,7 @@ export default function Sidebar({ searchInfo = [] }: Props) {
   }, [searchInput, setSearchWord]);
 
   return (
-    <div className="fixed h-full w-80 flex-none border-l border-r border-gray-700 p-4">
+    <div className="fixed h-full w-80 flex-none  p-4">
       <SearchInput
         value={searchInput}
         onChange={handleSearchChange}

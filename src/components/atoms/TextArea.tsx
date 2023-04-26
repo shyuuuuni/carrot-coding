@@ -5,5 +5,5 @@ type Props = {
 };
 
 export default function TextArea({ text }: Props) {
-  return <div className="text-lg">{text}</div>;
+  return <div className="max-w-prose whitespace-pre-wrap text-lg">{text}</div>;
 }

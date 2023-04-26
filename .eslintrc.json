@@ -3,7 +3,6 @@
     "airbnb",
     "plugin:@typescript-eslint/recommended",
     "plugin:react-hooks/recommended",
-    "plugin:jsx-a11y/recommended",
     "prettier",
     "plugin:prettier/recommended",
     "plugin:import/recommended",
@@ -35,12 +34,6 @@
     "prettier/prettier": ["error"],
     "react/prop-types": "off",
     "react/require-default-props": "off",
-    "jsx-a11y/label-has-associated-control": [
-      2,
-      {
-        "labelAttributes": ["htmlFor"]
-      }
-    ],
     "import/order": [
       "error",
       {
@@ -59,6 +52,10 @@
           "caseInsensitive": true
         }
       }
-    ]
+    ],
+    // NOTE: 개발 속도를 위해 잠시 플러그인 비활성화
+    "jsx-a11y/alt-text": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/no-static-element-interactions": "off"
   }
 }

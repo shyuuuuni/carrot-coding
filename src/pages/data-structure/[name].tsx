@@ -30,30 +30,39 @@ type Params = {
 export async function getStaticProps({
   params,
 }: GetStaticPropsContext<Params>): Promise<GetStaticPropsResult<Props>> {
-  // Get data structure name list
-  const dataStructureListRes = await fetch(`${API_URL}/data-structure/list`);
-  const dataStructureList = await dataStructureListRes.json();
+  const dataStructureName = params?.name as string;
 
-  // Make object with { name, link }
+  // 자료구조 목록 전체 가져오기
+  const dataStructureListRes = await fetch(`${API_URL}/data-structure/list`);
+  const dataStructureList: { [key: string]: DataStructureDetail[] } =
+    await dataStructureListRes.json();
+
+  // 사이드바를 위한 검색 정보
   const searchInfo = Object.keys(dataStructureList).map((name: string) => ({
     name,
     link: `/data-structure/${name.replaceAll(" ", "-")}`,
   }));
 
-  // Get data structure detail
-  const detailRes = await fetch(
-    `${API_URL}/data-structure/${params?.name?.replace(" ", "-")}`
-  );
-  const details = (await detailRes.json()) as DataStructureDetail[];
+  // 포스트 컨텐츠를 위한 자료구조 정보 [이름, 데이터]
+  const dataStructureInfos = Object.entries(dataStructureList).find((info) => {
+    return info[0].replaceAll(" ", "-") === dataStructureName;
+  });
+
+  if (!dataStructureInfos) {
+    throw Error(`data fetching error with ${dataStructureName}.`);
+  }
+
+  // 데이터만 필터링
+  const dataStructureDetails = dataStructureInfos[1];
 
   return {
     props: {
       searchInfo,
       details: {
-        name: details[0].name,
-        complexity: details[0].complexity,
-        description: details[0].description,
-        code: details
+        name: dataStructureDetails[0].name,
+        complexity: dataStructureDetails[0].complexity,
+        description: dataStructureDetails[0].description,
+        code: dataStructureDetails
           .map((detail) => ({
             language: detail.language,
             state: detail.state,
@@ -64,16 +73,16 @@ export async function getStaticProps({
           .sort(),
       },
     },
-    revalidate: ONE_DAY, // Re-generate every day
+    revalidate: ONE_DAY / 24, // 1시간마다 재생성
   };
 }
 
 export async function getStaticPaths() {
-  // Get data structure name list
+  // 자료구조 목록 전체 가져오기
   const res = await fetch(`${API_URL}/data-structure/list`);
   const dataStructureList = await res.json();
 
-  // Make name to link
+  // 자료구조 이름을 프론트엔드 URL 경로로 변경
   const paths = Object.keys(dataStructureList).map(
     (name: string) => `/data-structure/${name.replaceAll(" ", "-")}`
   );

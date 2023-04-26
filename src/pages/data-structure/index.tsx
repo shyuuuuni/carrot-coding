@@ -1,6 +1,7 @@
 import { GetStaticPropsResult } from "next/types";
 
-import Sidebar from "@/components/organisms/Sidebar";
+import IndexPostContents from "@/components/organisms/IndexPostContents";
+import Post from "@/components/templates/Post";
 import { API_URL } from "@/constants/env";
 import { ONE_DAY } from "@/constants/time";
 import { DataStructureSearchInfo } from "@/types/types";
@@ -11,10 +12,9 @@ type Props = {
 
 export default function DataStructure({ searchInfo }: Props) {
   return (
-    <div>
-      <Sidebar searchInfo={searchInfo} />
-      <div className="bg-transparent">자료구조 페이지</div>
-    </div>
+    <Post sidebarSearchInfo={searchInfo}>
+      <IndexPostContents />
+    </Post>
   );
 }
 

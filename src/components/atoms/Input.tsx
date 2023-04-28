@@ -19,7 +19,7 @@ export default function Input({ value, onChange, onSubmit }: Props) {
 
   return (
     <input
-      className="bg-inherit focus:outline-none h-full flex-grow appearance-none"
+      className="focus:outline-none h-full flex-grow appearance-none bg-transparent"
       value={value}
       onChange={onChange}
       onKeyDown={handleKeyDown}

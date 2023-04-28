@@ -1,7 +1,11 @@
 // DS: Data Structure
 export type DataStructureSearchInfo = {
-  name: string;
+  name: {
+    kr: string;
+    en: string;
+  };
   link: string;
+  description: string;
 };
 export type DataStructureName = {
   en: string;

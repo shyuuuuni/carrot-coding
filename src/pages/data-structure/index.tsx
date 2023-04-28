@@ -4,7 +4,7 @@ import IndexPostContents from "@/components/organisms/IndexPostContents";
 import Post from "@/components/templates/Post";
 import { API_URL } from "@/constants/env";
 import { ONE_DAY } from "@/constants/time";
-import { DataStructureSearchInfo } from "@/types/types";
+import { DataStructureDetail, DataStructureSearchInfo } from "@/types/types";
 
 type Props = {
   searchInfo: DataStructureSearchInfo[];
@@ -19,20 +19,22 @@ export default function DataStructure({ searchInfo }: Props) {
 }
 
 export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
-  // Get data structure name list
-  const res = await fetch(`${API_URL}/data-structure/list`);
-  const dataStructureList = await res.json();
+  // 자료구조 목록 전체 가져오기
+  const dataStructureListRes = await fetch(`${API_URL}/data-structure/list`);
+  const dataStructureList: { [key: string]: DataStructureDetail[] } =
+    await dataStructureListRes.json();
 
-  // Make object with { name, link }
-  const searchInfoList: DataStructureSearchInfo[] = Object.keys(
-    dataStructureList
-  ).map((name: string) => ({
-    name,
-    link: `/data-structure/${name.replaceAll(" ", "-")}`,
-  }));
+  // 사이드바를 위한 검색 정보
+  const searchInfo = Object.entries(dataStructureList).map(
+    ([name, detail]) => ({
+      name: detail[0].name,
+      link: `/data-structure/${name.replaceAll(" ", "-")}`,
+      description: detail[0].description,
+    })
+  );
 
   return {
-    props: { searchInfo: searchInfoList },
+    props: { searchInfo },
     revalidate: ONE_DAY, // Re-generate every day
   };
 }

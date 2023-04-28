@@ -46,13 +46,16 @@ export default function Sidebar({ searchInfo = [] }: Props) {
   }, [searchInput, setSearchWord]);
 
   return (
-    <div className="fixed h-full w-80 flex-none  p-4">
-      <SearchInput
-        value={searchInput}
-        onChange={handleSearchChange}
-        onSubmit={handleSearchSubmit}
-      />
-      {sidebarMenus}
+    <div className="fixed top-20 bottom-0 w-80 flex-none overflow-y-auto p-4 pb-8 pt-0 lg:block">
+      <div className="sticky top-0">
+        <div className="h-6 w-full bg-gray-300 dark:bg-gray-800" />
+        <SearchInput
+          value={searchInput}
+          onChange={handleSearchChange}
+          onSubmit={handleSearchSubmit}
+        />
+      </div>
+      <ul className="flex flex-col gap-1">{sidebarMenus}</ul>
     </div>
   );
 }

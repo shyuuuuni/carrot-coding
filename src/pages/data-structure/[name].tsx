@@ -38,10 +38,13 @@ export async function getStaticProps({
     await dataStructureListRes.json();
 
   // 사이드바를 위한 검색 정보
-  const searchInfo = Object.keys(dataStructureList).map((name: string) => ({
-    name,
-    link: `/data-structure/${name.replaceAll(" ", "-")}`,
-  }));
+  const searchInfo = Object.entries(dataStructureList).map(
+    ([name, detail]) => ({
+      name: detail[0].name,
+      link: `/data-structure/${name.replaceAll(" ", "-")}`,
+      description: detail[0].description,
+    })
+  );
 
   // 포스트 컨텐츠를 위한 자료구조 정보 [이름, 데이터]
   const dataStructureInfos = Object.entries(dataStructureList).find((info) => {

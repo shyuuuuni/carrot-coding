@@ -1,3 +1,12 @@
+import { StateCreator } from "zustand";
+import { PersistOptions } from "zustand/middleware/persist";
+
+// zustand
+export type Persist<T> = (
+  config: StateCreator<T>,
+  options: PersistOptions<T>
+) => StateCreator<T>;
+
 // DS: Data Structure
 export type DataStructureSearchInfo = {
   name: {

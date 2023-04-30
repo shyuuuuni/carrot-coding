@@ -4,5 +4,7 @@
   "singleQuote": false,
   "trailingComma": "es5",
   "semi": true,
-  "plugins": ["prettier-plugin-tailwindcss"]
+  "tailwindConfig": "./tailwind.config.js",
+  "pluginSearchDirs": false,
+  "plugins": []
 }

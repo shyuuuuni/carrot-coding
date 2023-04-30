@@ -48,7 +48,7 @@ export default function Sidebar({ searchInfo = [] }: Props) {
   return (
     <div className="fixed top-20 bottom-0 w-80 flex-none overflow-y-auto p-4 pb-8 pt-0 lg:block">
       <div className="sticky top-0">
-        <div className="h-6 w-full bg-gray-300 dark:bg-gray-800" />
+        <div className="h-6 w-full bg-gray-200 dark:bg-gray-800" />
         <SearchInput
           value={searchInput}
           onChange={handleSearchChange}

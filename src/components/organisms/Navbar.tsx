@@ -9,7 +9,7 @@ function Navbar() {
   const { isDark, toggleDark } = useDarkMode();
 
   return (
-    <nav className="flex w-full flex-wrap items-center justify-between border-b border-gray-700 bg-gray-800 p-6">
+    <nav className="z-10 flex w-full flex-wrap items-center justify-between border-b border-gray-700 bg-gray-800 p-6">
       <NavLogo />
       <div className="flex flex-grow items-center">
         <div className="flex flex-grow gap-4 text-sm">

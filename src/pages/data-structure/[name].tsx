@@ -7,11 +7,11 @@ import { ONE_DAY } from "@/constants/time";
 import {
   DataStructureDetail,
   DataStructureDetails,
-  DataStructureSearchInfo,
+  SearchInfo,
 } from "@/types/types";
 
 type Props = {
-  searchInfo: DataStructureSearchInfo[];
+  searchInfo: SearchInfo[];
   details: DataStructureDetails;
 };
 

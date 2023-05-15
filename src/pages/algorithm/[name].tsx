@@ -16,8 +16,6 @@ type Props = {
 };
 
 export default function AlgorithmPost({ searchInfo, detail }: Props) {
-  console.log(detail);
-
   return (
     <Post sidebarSearchInfo={searchInfo}>
       <PostContents detail={detail} />

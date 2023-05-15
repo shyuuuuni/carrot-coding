@@ -7,7 +7,7 @@ import DropDownItem from "@/components/atoms/DropDownItem";
 import TextArea from "@/components/atoms/TextArea";
 import TimeComplexity from "@/components/atoms/TimeComplexity";
 import useScrollToTop from "@/hooks/useScrollToTop";
-import { AlgorithmDetail, CodeDetail, Name } from "@/types/types";
+import { AlgorithmDetail, CodeDetail } from "@/types/types";
 
 type Props = {
   detail: AlgorithmDetail;

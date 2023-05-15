@@ -35,10 +35,8 @@ export default function Algorithm({ searchInfo }: Props) {
 }
 
 export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
-  // 자료구조 목록 전체 가져오기
-  const algorithmSearchInfosResponse = await fetch(
-    `${API_URL}/algorithms/infos`
-  );
+  // 알고리즘 목록 전체 가져오기
+  const algorithmSearchInfosResponse = await fetch(`${API_URL}/algorithms`);
   const algorithmSearchInfos: AlgorithmSearchInfo[] =
     await algorithmSearchInfosResponse.json();
 

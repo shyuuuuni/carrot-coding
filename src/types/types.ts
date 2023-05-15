@@ -43,11 +43,11 @@ export type DataStructureDetails = {
 };
 
 // Algorithm
-export type AlgorithmName = {
+export type Name = {
   en: string;
   kr: string;
 };
-export type AlgorithmCode = {
+export type CodeDetail = {
   language: string;
   codeState: "created" | "ok";
   code: string;
@@ -56,10 +56,10 @@ export type AlgorithmCode = {
 };
 export type AlgorithmDetail = {
   id: string;
-  name: AlgorithmName;
+  name: Name;
   description: string;
   descriptionReportCount: number;
-  codes: AlgorithmCode[];
+  codes: CodeDetail[];
   createdAt: string; // YYYY-MM-DDTHH-MM-SS.sssZ
   updatedAt: string; // YYYY-MM-DDTHH-MM-SS.sssZ
 };

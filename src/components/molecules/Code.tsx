@@ -14,10 +14,6 @@ export default function Code({ codes }: Props) {
     undefined | DataStructureCode
   >();
 
-  const selectedItem = selectedCode
-    ? { label: selectedCode.language }
-    : undefined;
-
   // 페이지 이동 시 selectedCode를 업데이트
   useEffect(() => {
     setSelectedCode(codes?.[0]);
@@ -25,7 +21,7 @@ export default function Code({ codes }: Props) {
 
   return (
     <div>
-      <DropDown defaultLabel="Language" selectedItem={selectedItem}>
+      <DropDown defaultLabel="Language" selectedItem={selectedCode?.language}>
         {codes.map((code) => {
           return (
             <DropDownItem

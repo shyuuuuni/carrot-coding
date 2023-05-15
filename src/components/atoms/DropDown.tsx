@@ -2,9 +2,7 @@ import React, { useState } from "react";
 
 type Props = {
   defaultLabel: string;
-  selectedItem?: {
-    label: string;
-  };
+  selectedItem?: string;
 } & React.PropsWithChildren;
 
 export default function DropDown({
@@ -29,7 +27,7 @@ export default function DropDown({
         onClick={toggleDropdown}
         className="focus:outline-none rounded-md bg-gray-300 py-2 px-4 text-gray-700 shadow-md focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100"
       >
-        {selectedItem ? selectedItem.label : defaultLabel}
+        {selectedItem ?? defaultLabel}
       </button>
       {isOpen && (
         <div

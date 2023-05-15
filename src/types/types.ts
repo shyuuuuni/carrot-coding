@@ -7,8 +7,8 @@ export type Persist<T> = (
   options: PersistOptions<T>
 ) => StateCreator<T>;
 
-// DS: Data Structure
-export type DataStructureSearchInfo = {
+// Sidebar
+export type SearchInfo = {
   name: {
     kr: string;
     en: string;
@@ -16,6 +16,8 @@ export type DataStructureSearchInfo = {
   link: string;
   description: string;
 };
+
+// DataStructure
 export type DataStructureName = {
   en: string;
   kr: string;
@@ -39,3 +41,26 @@ export type DataStructureDetails = {
   description: string;
   code: DataStructureCode[];
 };
+
+// Algorithm
+export type Name = {
+  en: string;
+  kr: string;
+};
+export type CodeDetail = {
+  language: string;
+  codeState: "created" | "ok";
+  code: string;
+  complexity: { [key: string]: string };
+  codeReportCount: number;
+};
+export type AlgorithmDetail = {
+  id: string;
+  name: Name;
+  description: string;
+  descriptionReportCount: number;
+  codes: CodeDetail[];
+  createdAt: string; // YYYY-MM-DDTHH-MM-SS.sssZ
+  updatedAt: string; // YYYY-MM-DDTHH-MM-SS.sssZ
+};
+export type AlgorithmSearchInfo = Pick<AlgorithmDetail, "name" | "description">;

@@ -1,10 +1,10 @@
 import React from "react";
 
 import Sidebar from "@/components/organisms/Sidebar";
-import { DataStructureSearchInfo } from "@/types/types";
+import { SearchInfo } from "@/types/types";
 
 type Props = {
-  sidebarSearchInfo: DataStructureSearchInfo[];
+  sidebarSearchInfo: SearchInfo[];
 } & React.PropsWithChildren;
 
 export default function Post({ sidebarSearchInfo, children }: Props) {

@@ -2,10 +2,10 @@ import React, { useCallback, useMemo, useState } from "react";
 
 import SidebarMenu from "@/components/atoms/SidebarMenu";
 import SearchInput from "@/components/molecules/SearchInput";
-import { DataStructureSearchInfo } from "@/types/types";
+import { SearchInfo } from "@/types/types";
 
 type Props = {
-  searchInfo?: DataStructureSearchInfo[];
+  searchInfo?: SearchInfo[];
 };
 
 export default function Sidebar({ searchInfo = [] }: Props) {
